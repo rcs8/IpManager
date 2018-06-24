@@ -4,6 +4,7 @@ export class Aluno{
   loginHuxley: string;
   notas: Map<string,number>;
   faltas: number;
+  senha: string;
 
   constructor(){
     this.clean();
@@ -28,6 +29,7 @@ export class Aluno{
     this.nome = from.nome;
     this.loginCin = from.loginCin;
     this.loginHuxley = from.loginHuxley;
+    this.senha = from.senha;
     this.faltas = from.faltas;
     this.copyNotasFrom(from.notas);
   }
