@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Aluno } from './aluno';
 
-@Injetctable()
+@Injectable()
 export class AlunoService {
   alunos: Aluno[] = [];
 
@@ -16,8 +16,8 @@ export class AlunoService {
     return result;
   }
 
-  loginNaoCadastrado(login: string) boolean {
-    return !this.alunos.find(a => a.loginCin == login)
+  logincinNaoCadastrado(login: string): boolean {
+    return !this.alunos.find(a => a.loginCin == login);
   }
 
   atualizarNotas(aluno: Aluno): void {
