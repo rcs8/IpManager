@@ -8,7 +8,7 @@ import {AlunoService} from './aluno.service';
 
 import {AlunoRoutingModule} from './aluno-routing.module';
 
-@NgModule([
+@NgModule({
   imports:[
     BrowserModule,
     FormsModule,
@@ -18,6 +18,6 @@ import {AlunoRoutingModule} from './aluno-routing.module';
     AlunosRegisterComponent
   ],
   providers: [AlunoService]
-])
+})
 
 export class HeroesModule {}

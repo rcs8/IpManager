@@ -1,5 +1,5 @@
 export class Aluno{
-  nome: string;
+  id: number;
   loginCin: string;
   loginHuxley: string;
   notas: Map<string,number>;
@@ -11,7 +11,7 @@ export class Aluno{
   }
 
   clean(){
-    this.nome = "";
+    this.id = "";
     this.loginCin = "";
     this.loginHuxley = "";
     this.notas = new Map<string,number>();

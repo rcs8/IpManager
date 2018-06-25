@@ -16,4 +16,4 @@ const alunosRoutes: Routes = [
     RouterModule
   ]
 })
-export class AlunoRoutingModule{ }
+export class AlunoRoutingModule {}
