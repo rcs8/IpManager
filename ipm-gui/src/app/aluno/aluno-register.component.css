@@ -1,0 +1,141 @@
+.wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: auto;
+  background-color: #fff;
+  background-size: 100% 1.2em;
+}
+
+.container{
+  order: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content:space-between;
+  align-items: center;
+  width: 350px;
+  height: 600px;
+}
+
+.image{
+  order: 0;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  width: 45%;
+  height: 25%;
+}
+
+.logo{
+  order: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.info-container{
+  order: 1;
+  height: 15%;
+}
+
+.info-container h1{
+  cursor: default;
+  font-family: Georgia;
+  font-size: 40px;
+  color: #56fe99;
+}
+
+.register-form {
+  order: 2;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
+  align-items: center;
+  height: 50%;
+  width: 100%;
+}
+
+.input-holder{
+  order: 0;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
+  align-items: center;
+
+}
+
+.login-input{
+  order: 0;
+}
+
+.huxley-input{
+  order: 1;
+}
+
+.password-input{
+  order: 2;
+}
+
+input {
+  display: inline-block;
+  margin: 3px 0px;
+  background: #fff;
+  border: 1px solid rgba(34,36,38,.15);
+  color: rgba(0,0,0,.87);
+  width: 250px;
+  height: 25px;
+  font-family: Georgia;
+  font-size: 18px;
+  text-align: center;
+  border-radius: .28571429rem;
+}
+
+.register-report{
+  order: 2;
+  color: #b43232;
+  font-size: 12px;
+  font-style:italic;
+  font-family: "Times New Roman";
+}
+
+.button-holder{
+  order: 1;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 40px;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  vertical-align: baseline;
+  background: #e0e1e2 none;
+  text-align: center;
+  margin: 7px;
+  width: 100px;
+  height: 100%;
+  border-radius: .28571429rem;
+  background-color: #56fe99;
+  color: #fff;
+}
+
+button:hover{
+  color: #56fe99;
+  background-color: #fff;
+  border: 1px solid #56fe99;
+}
