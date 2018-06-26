@@ -1,0 +1,59 @@
+<html>
+  <div class="wrapper">
+
+    <div class="header">
+
+    </div>
+
+    <div class="class-info">
+      <table>
+
+          <thead>
+            <th>
+              ID
+            </th>
+            <th>
+              Dia
+            </th>
+            <th>
+              Aula
+            </th>
+          </thead>
+        <tbody>
+          <tr>
+            <td class="info">{{aula.id}}</td>
+            <td class="info">{{aula.dia}}</td>
+            <td class="info">{{aula.descricao}}</td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+
+    <div class="students" *ngIf="alunos.length > 0">
+      <table>
+
+          <thead>
+            <th>
+              ID
+            </th>
+            <th>
+              login
+            </th>
+            <th>
+              Presença
+            </th>
+          </thead>
+        <tbody>
+          <tr *ngFor="let a of alunos">
+            <td class="info">{{a.id}}</td>
+            <td class="info">{{a.login}}</td>
+            <td class="input"><input type="checkbox" [[ngModel]]="this.aula.presentes[{{a.loginCin}}]" [unchecked]="this.value" (change)="registrarFalta(a)"></td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+
+  </div>
+</html>

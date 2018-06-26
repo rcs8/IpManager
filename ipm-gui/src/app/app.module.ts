@@ -8,6 +8,8 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { NotasComponent } from './notas/notas.component';
 import { AlunoComponent } from './aluno/aluno.component';
+import { AulaComponent } from './aula/aula.component';
+import { ChamadaComponent } from './chamda/chamada.component';
 import { AlunoService } from './aluno/aluno.service';
 
 @NgModule({
@@ -15,6 +17,8 @@ import { AlunoService } from './aluno/aluno.service';
     AppComponent,
     AlunoComponent,
     NotasComponent,
+    AulaComponent,
+    ChamadaComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +32,14 @@ import { AlunoService } from './aluno/aluno.service';
       {
         path: 'notas',
         component: NotasComponent
+      },
+      {
+        path: 'aulas',
+        component: AulaComponent
+      },
+      {
+        path: 'aulas/:id',
+        component: ChamadaComponent
       }
     ])
   ],

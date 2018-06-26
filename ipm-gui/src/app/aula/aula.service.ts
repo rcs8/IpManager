@@ -35,4 +35,14 @@ export class AulaService {
     }
     return result;
   }
+
+  getAula(id: number) : Aula {
+    var result : Aula = new Aula();
+    for(let a of this.aulas){
+      if(a.id == id){
+        result = a.clone();
+      }
+    }
+    return result;
+  }
 }
