@@ -1,13 +1,13 @@
 {
-  "name": "test-acceptance",
-  "description": "Testes de aceitação do IpManager",
+  "name": "testes-acceptance",
+  "description": "Testes de aceitação do teaching assistant",
   "scripts": {
     "tsc": "tsc",
     "test": "protractor typeScript/config/config.js",
     "webdriver-update": "webdriver-manager update",
     "webdriver-start": "webdriver-manager start"
   },
-  "author": "Rodrigo Cunha",
+  "author": "Paulo Borba",
   "devDependencies": {
     "@types/cucumber": "0.0.38",
     "@types/node": "^8.0.31",
