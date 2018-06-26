@@ -32,16 +32,11 @@ export class AlunoService {
     }
   }
 
-  marcarFalta(aluno: Aluno, absence: boolean): void {
+  marcarFalta(aluno: Aluno): void {
     aluno = aluno.clone();
     for(let a of this.alunos){
       if(a.loginCin == aluno.loginCin){
-        if(presence == true){
-          a.faltas = aluno.faltas + 2;
-        } else {
-          a.faltas = aluno.faltas - 2;
-        }
-
+        a.faltas = aluno.faltas;          
       }
     }
   }

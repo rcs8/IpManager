@@ -16,7 +16,7 @@ export class AlunoComponent implements OnInit
   aluno: Aluno = new Aluno();
   alunos: Aluno[];
   userRegistered: boolean = false;
-  id: number = 1;
+  id: number;
 
   criar(a: Aluno): void {
     a.id = this.id;
@@ -33,5 +33,8 @@ export class AlunoComponent implements OnInit
 
   ngOnInit(): void {
     this.alunos = this.alunoService.getAlunos();
+    if(!this.alunos == null){
+      this.id = this.alunos.length + 1;
+    }
   }
 }

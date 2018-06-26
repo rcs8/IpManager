@@ -15,7 +15,7 @@ export class AulaComponent implements OnInit
 
    aula: Aula = new Aula();
    aulas: Aula[];
-   id: number = 1;
+   id: number;
 
    cadastrar(a: Aula) : void {
      a.id = this.id;
@@ -30,5 +30,11 @@ export class AulaComponent implements OnInit
 
    ngOnInit(): void {
      this.aulas = this.aulaService.getAulas();
+     if(this.aulas == null){
+       this.id = 1;
+     } else {
+       this.id = this.aulas.length + 1;
+     }
+
    }
 }

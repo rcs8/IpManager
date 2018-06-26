@@ -81,6 +81,9 @@ export class Aluno{
   getAbsence(classes: number) : number {
     var absence : number = 0;
     absence = this.faltas / classes;
+    if(absence > 1){
+      absence = 1;
+    }
     return absence * 100;
   }
 

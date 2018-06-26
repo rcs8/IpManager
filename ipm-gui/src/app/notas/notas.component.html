@@ -75,7 +75,7 @@
           <td class="info">{{a.getAverage().toFixed(2)}}</td>
           <td class="final"><input ng-pattern="/^[0-10]+$/" [(ngModel)]="a.final" (change)="atualizarAluno(a)" placeholder = "-"></td>
           <td class="info">{{a.getFinalAverage().toFixed(2)}}</td>
-          <td class="info">{{a.getStatus(this.classes)}}</td>
+          <td class="info">{{a.getStatus(classes)}}</td>
         </tr>
       </tbody>
 

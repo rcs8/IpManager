@@ -19,15 +19,6 @@ export class AulaService {
     return !this.aulas.find(a => a.dia == aula.dia);
   }
 
-  atualizarPresenca(aula: Aula): void {
-    aula = aula.clone();
-    for(let a of this.aulas){
-      if(a.dia == aula.dia){
-        a.presentes = aula.presentes;
-      }
-    }
-  }
-
   getAulas() : Aula[] {
     var result : Aula[] = [];
     for(let a of this.aulas){

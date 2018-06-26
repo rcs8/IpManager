@@ -30,7 +30,7 @@
       </table>
     </div>
 
-    <div class="students" *ngIf="alunos.length > 0">
+    <div class="students">
       <table>
 
           <thead>
@@ -41,14 +41,22 @@
               login
             </th>
             <th>
-              Presença
+              Faltas
+            </th>
+            <th>
+              % Faltas
+            </th>
+            <th>
+              Chamada
             </th>
           </thead>
         <tbody>
           <tr *ngFor="let a of alunos">
             <td class="info">{{a.id}}</td>
-            <td class="info">{{a.login}}</td>
-            <td class="input"><input type="checkbox" [[ngModel]]="this.aula.presentes[{{a.loginCin}}]" [unchecked]="this.value" (change)="registrarFalta(a)"></td>
+            <td class="info">{{a.loginCin}}</td>
+            <td class="info">{{a.faltas}}</td>
+            <td class="info">{{a.getAbsence(classes)}}</td>
+            <td class="input"><button (click)="registrarFalta(a)">Falta</button></td>
           </tr>
         </tbody>
 

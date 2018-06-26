@@ -9,8 +9,9 @@ import { AppComponent } from './app.component';
 import { NotasComponent } from './notas/notas.component';
 import { AlunoComponent } from './aluno/aluno.component';
 import { AulaComponent } from './aula/aula.component';
-import { ChamadaComponent } from './chamda/chamada.component';
+import { ChamadaComponent } from './aula/chamada.component';
 import { AlunoService } from './aluno/aluno.service';
+import { AulaService } from './aula/aula.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { AlunoService } from './aluno/aluno.service';
       }
     ])
   ],
-  providers: [AlunoService],
+  providers: [AlunoService, AulaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
