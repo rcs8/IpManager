@@ -1,17 +1,14 @@
-import { Injectable } from '@angular/core';
-
 import { Aluno } from './aluno';
 
-@Injectable()
 export class AlunoService {
   alunos: Aluno[] = [];
 
   criar(aluno: Aluno): Aluno {
-    aluno = aluno.clone();
     var result = null;
     if(this.logincinNaoCadastrado(aluno.loginCin)){
-      this.alunos.push(aluno);
-      result = aluno;
+      result = new Aluno();
+      result.copyFrom(aluno);
+      this.alunos.push(result);
     }
     return result;
   }
@@ -36,7 +33,7 @@ export class AlunoService {
     aluno = aluno.clone();
     for(let a of this.alunos){
       if(a.loginCin == aluno.loginCin){
-        a.faltas = aluno.faltas;          
+        a.faltas = aluno.faltas;
       }
     }
   }

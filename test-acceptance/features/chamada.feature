@@ -1,6 +1,7 @@
-Feature: As a teacher
-         I want to be able to create classes and record students attendances
-         So that i can determine if the student attended the required number of classes
+Feature: Chamada
+As a teacher
+I want to be able to create classes and record students attendances
+So that i can determine if the student attended the required number of classes
 
 Scenario: Register absence (GUI)
 Given I am at the classes page
