@@ -20,7 +20,7 @@ export class ChamadaComponent implements OnInit
     private aulaService: AulaService,
     private route: ActivatedRoute
   ){}
-
+    aulas: Aula [];
     aula: Aula = new Aula();
     classes: number;
     alunos: Aluno[];
@@ -28,15 +28,24 @@ export class ChamadaComponent implements OnInit
 
     registrarFalta(aluno: Aluno){
       aluno.faltas = aluno.faltas + 1;
-      this.alunoService.marcarFalta(aluno);
+      this.alunoService.atualizar(aluno);
     }
 
     ngOnInit(){
       this.route.paramMap.subscribe(params => {
         this.selectedId = +params.get('id');
       });
-      this.aula = this.aulaService.getAula(this.selectedId);,
-      this.classes = this.aulaService.getAulas().length;
-      this.alunos = this.alunoService.getAlunos();
+
+      this.aulaService.getAulas()
+         .then(as => this.aulas = as)
+         .catch(erro => alert(erro));
+      this.alunoService.getAlunos()
+          .then(as => this.alunos = as)
+          .catch(erro => alert(erro));
+
+      this.aula = this.aula.find(a => a.id == selectedId);
+      this.classes = this.aulas.length;
+
+
     }
 }

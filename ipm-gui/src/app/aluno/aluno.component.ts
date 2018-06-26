@@ -20,19 +20,22 @@ export class AlunoComponent implements OnInit
 
   criar(a: Aluno): void {
     a.id = this.id;
-    if(this.alunoService.criar(a)){
-      this.alunos.push(a);
-      this.aluno = new Aluno();
-      this.userRegistered = false;
-      this.id = this.id + 1;
-    } else {
-      this.userRegistered = true;
-      this.aluno = new Aluno();
-    }
+    this.alunoService.criar(a).then(ab => {
+          if (ab) {
+             this.alunos.push(ab);
+             this.aluno = new Aluno();
+             this.userRegistered = false;
+          } else {
+             this.userRegistered = true;
+          }
+       })
+       .catch(erro => alert(erro));
   }
 
   ngOnInit(): void {
-    this.alunos = this.alunoService.getAlunos();
+    this.alunoService.getAlunos()
+       .then(as => this.alunos = as)
+       .catch(erro => alert(erro));
     if(!this.alunos == null){
       this.id = this.alunos.length + 1;
     }

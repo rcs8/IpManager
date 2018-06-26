@@ -1,39 +1,34 @@
-import { Injectable } from '@angular/core';
+import { Injectable }    from '@angular/core';
+import { Http, Headers } from '@angular/http';
+import 'rxjs/add/operator/toPromise';
+
 import { Aula } from './aula';
 
-@Injectable ()
+@Injectable
 export class AulaService {
-  aulas: Aula[] = [];
+  private headers = new Headers({'Content-Type': 'application/json'});
+  private taURL = 'http://localhost:3000';
+
+  constructor(private http: Http) { }
 
   criar(aula: Aula): Aula {
-    aula = aula.clone();
-    var result = null;
-    if(this.aulaExistente(aula)){
-      this.aulas.push(aula);
-      result = aula;
-    }
-    return result;
-  }
-
-  aulaExistente(aula: Aula) : boolean {
-    return !this.aulas.find(a => a.dia == aula.dia);
+    return this.http.post(this.taURL + "/aulas",JSON.stringify(aula), {headers: this.headers})
+         .toPromise()
+         .then(res => {
+            if (res.json().success) {return aula;} else {return null;}
+         })
+         .catch(this.tratarErro);
   }
 
   getAulas() : Aula[] {
-    var result : Aula[] = [];
-    for(let a of this.aulas){
-      result.push(a.clone());
-    }
-    return result;
+    return this.http.get(this.taURL + "/aluno")
+             .toPromise()
+             .then(res => res.json() as Aula[])
+             .catch(this.tratarErro);
   }
-
-  getAula(id: number) : Aula {
-    var result : Aula = new Aula();
-    for(let a of this.aulas){
-      if(a.id == id){
-        result = a.clone();
-      }
-    }
-    return result;
-  }
+  
+  private tratarErro(erro: any): Promise<any>{
+   console.error('Acesso mal sucedido ao serviço de aulas',erro);
+   return Promise.reject(erro.message || erro);
+ }
 }

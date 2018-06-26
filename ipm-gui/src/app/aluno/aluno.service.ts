@@ -1,48 +1,43 @@
+import { Injectable }    from '@angular/core';
+import { Http, Headers } from '@angular/http';
+import 'rxjs/add/operator/toPromise';
+
 import { Aluno } from './aluno';
 
+@Injectable
 export class AlunoService {
-  alunos: Aluno[] = [];
+  private headers = new Headers({'Content-Type': 'application/json'});
+  private taURL = 'http://localhost:3000';
+
+  constructor(private http: Http) { }
 
   criar(aluno: Aluno): Aluno {
-    var result = null;
-    if(this.logincinNaoCadastrado(aluno.loginCin)){
-      result = new Aluno();
-      result.copyFrom(aluno);
-      this.alunos.push(result);
-    }
-    return result;
+    return this.http.post(this.taURL + "/alunos",JSON.stringify(aluno), {headers: this.headers})
+         .toPromise()
+         .then(res => {
+            if (res.json().success) {return aluno;} else {return null;}
+         })
+         .catch(this.tratarErro);
   }
 
-  logincinNaoCadastrado(login: string): boolean {
-    return !this.alunos.find(a => a.loginCin == login);
-  }
-
-  atualizarNotas(aluno: Aluno): void {
-    aluno = aluno.clone();
-    for(let a of this.alunos){
-      if(a.loginCin == aluno.loginCin){
-        a.listas = aluno.listas;
-        a.provas = aluno.provas;
-        a.miniprojeto = aluno.miniprojeto;
-        a.final = aluno.final;
-      }
-    }
-  }
-
-  marcarFalta(aluno: Aluno): void {
-    aluno = aluno.clone();
-    for(let a of this.alunos){
-      if(a.loginCin == aluno.loginCin){
-        a.faltas = aluno.faltas;
-      }
-    }
+  atualizar(aluno: Aluno): void {
+    return this.http.put(this.taURL + "/alunos",JSON.stringify(aluno), {headers: this.headers})
+         .toPromise()
+         .then(res => {
+            if (res.json().success) {return aluno;} else {return null;}
+         })
+         .catch(this.tratarErro);
   }
 
   getAlunos(): Aluno[] {
-    var result: Aluno[] = [];
-    for(let a of this.alunos){
-      result.push(a.clone());
-    }
-    return result;
+    return this.http.get(this.taURL + "/alunos")
+             .toPromise()
+             .then(res => res.json() as Aluno[])
+             .catch(this.tratarErro);
   }
+
+  private tratarErro(erro: any): Promise<any>{
+   console.error('Acesso mal sucedido ao serviço de alunos',erro);
+   return Promise.reject(erro.message || erro);
+ }
 }

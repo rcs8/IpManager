@@ -19,20 +19,21 @@ export class AulaComponent implements OnInit
 
    cadastrar(a: Aula) : void {
      a.id = this.id;
-     if(this.aulaService.criar(a)){
-      this.aulas.push(a);
-      this.aula = new Aula();
-      this.id = this.id + 1;
-    } else {
-      this.aula = new Aula();
-    }
+     this.aulaService.criar(a)
+        .then(ab => {
+           if (ab) {
+              this.aulas.push(ab);
+              this.aula = new Aluno();
+           }
+        })
+        .catch(erro => alert(erro));
    }
 
    ngOnInit(): void {
-     this.aulas = this.aulaService.getAulas();
-     if(this.aulas == null){
-       this.id = 1;
-     } else {
+     this.aulaService.getAulas()
+        .then(as => this.aulas = as)
+        .catch(erro => alert(erro));
+     if(!this.aulas == null){
        this.id = this.aulas.length + 1;
      }
 
