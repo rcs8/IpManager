@@ -1,0 +1,125 @@
+.wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: auto;
+  background-color: #fff;
+  background-size: 100% 1.2em;
+}
+
+.header {
+  order: 0;
+  flex: 0 0 80px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.input-holder{
+  order: 0;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  height: 40px;
+}
+
+.day-input {
+  order: 0;
+}
+
+.description-input {
+  order: 1;
+}
+
+input {
+  display: inline-block;
+  margin: 3px 0px;
+  background: #fff;
+  border: 1px solid rgba(34,36,38,.15);
+  color: rgba(0,0,0,.87);
+  width: 250px;
+  height: 25px;
+  font-family: Georgia;
+  font-size: 16px;
+  text-align: center;
+  border-radius: .28571429rem;
+}
+
+.button-holder{
+  order: 1;
+  margin-left: 10px;
+  height: 40px;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  margin: 3px 0px;
+  vertical-align: baseline;
+  background: #e0e1e2 none;
+  text-align: center;
+  width: 100px;
+  height: 29px;
+  border-radius: .28571429rem;
+  background-color: #56fe99;
+  color: #fff;
+}
+
+button:hover{
+  color: #56fe99;
+  background-color: #fff;
+  border: 1px solid #56fe99;
+}
+
+.classes {
+  order: 1;
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+thead th {
+  background: #56fe99;
+  color: #FFF;
+  font-family: Georgia;
+  font-size: 16px;
+  font-weight: 100;
+  letter-spacing: 3px;
+  width: 100px;
+  height: 25px;
+  margin-right: 5px;
+  text-transform: capitalize;
+  border-radius: .28571429rem;
+}
+
+tr , td a {
+  text-align: center;
+  font-family: Georgia;
+}
+
+td a {
+  cursor: pointer;
+}
+
+a:hover {
+  color: #e6e6e6;
+  background-color: #56fe99;
+}
+
+*{
+}

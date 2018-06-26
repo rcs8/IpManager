@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
   flex-flow: column nowrap;
-  justify-content: flex-star;
+  justify-content: flex-start;
   align-items: center;
   position: absolute;
   height: 80%;
@@ -45,16 +45,6 @@ thead th {
   margin: 0px 10px;
   text-transform: capitalize;
   border-radius: .28571429rem;
-}
-
-.table-head {
-  order: 0;
-  width: 100%;
-}
-
-.table-body{
-  order: 1;
-  width: 400px;
 }
 
 tr {

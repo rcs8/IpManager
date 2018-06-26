@@ -1,0 +1,52 @@
+<html>
+
+  <div class="wrapper">
+
+    <div class="header">
+
+      <div class="input-holder">
+
+        <div class="day-input">
+          <input [(ngModel)]="aula.day" name="day" placeholder="Dia da Aula">
+        </div>
+
+        <div class="description-input">
+          <input [(ngModel)]="aula.descricao" name="description" placeholder="Descrição">
+        </div>
+
+      </div>
+
+      <div class="button-holder">
+        <button (click)="cadastrar(aula)">Cadastrar</button>
+      </div>
+
+    </div>
+
+    <div class="classes">
+      <table>
+
+          <thead>
+            <th>
+              ID
+            </th>
+            <th>
+              Dia
+            </th>
+            <th>
+              Descrição
+            </th>
+          </thead>
+        <tbody>
+          <tr *ngFor="let a of aulas">
+            <td><a [routerLink]="['/aulas', a.id]">{{a.id}}</a></td>
+            <td class="info">{{a.dia}}</td>
+            <td class="info">{{a.descricao}}</td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+
+  </div>
+
+</html>
