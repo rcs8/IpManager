@@ -35,7 +35,7 @@ export class Aluno{
   }
 
   copyFrom(from: Aluno): void {
-    this.id = from.nome;
+    this.id = from.id;
     this.loginCin = from.loginCin;
     this.loginHuxley = from.loginHuxley;
     this.senha = from.senha;
@@ -59,13 +59,14 @@ export class Aluno{
 
   getAverage(): number{
     var average : number = 0;
+
     for(let key in this.listas){
       average = average + (this.listas[key] * 2)
     }
     for(let key in this.provas){
       average = average + (this.provas[key] * 7)
     }
-    average = average + (miniprojeto * 1);
+    average = average + (this.miniprojeto * 1);
 
     return average / 34;
   }
@@ -73,7 +74,7 @@ export class Aluno{
   getFinalAverage(): number{
     var finalAverage : number = 0;
     var average : number = this.getAverage();
-    finalAverage = average + this.final / 2;
+    finalAverage = (average + this.final)/ 2;
     return finalAverage;
   }
 
@@ -85,16 +86,16 @@ export class Aluno{
 
   getStatus(classes: number) : string {
     var status : string = "";
-    var absence : number = getAbsence(classes);
+    var abscence : number = this.getAbsence(classes);
     if(abscence > 25){
       status = "Reprovado por Falta";
     } else {
-      var average : number = getAverage();
-      if(average > 7) {
+      var average : number = this.getAverage();
+      if(average >= 7) {
         status = "Aprovado por média";
       } else {
-        var finalAverage : number = getFinalAverage();
-        if(finalAverage > 5){
+        var finalAverage : number = this.getFinalAverage();
+        if(finalAverage >= 5){
           status = "Aprovado";
         } else {
           status = "Reprovado";

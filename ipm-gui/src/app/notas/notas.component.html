@@ -1,0 +1,88 @@
+<div class="wrapper">
+
+  <div class="header">
+
+  </div>
+
+  <div class="table">
+    <table>
+
+        <thead>
+          <th>
+            ID
+          </th>
+          <th>
+            Login
+          </th>
+          <th>
+            Lista1
+          </th>
+          <th>
+            Lista2
+          </th>
+          <th>
+            Lista3
+          </th>
+          <th>
+            Lista4
+          </th>
+          <th>
+            Lista5
+          </th>
+          <th>
+            Lista6
+          </th>
+          <th>
+            EE1
+          </th>
+          <th>
+            EE2
+          </th>
+          <th>
+            EE3
+          </th>
+          <th>
+            Mini-Projeto
+          </th>
+          <th>
+            Média
+          </th>
+          <th>
+            Final
+          </th>
+          <th>
+            Média Final
+          </th>
+          <th>
+            Status
+          </th>
+        </thead>
+
+      <tbody>
+        <tr *ngFor="let a of alunos">
+          <td class="info">{{a.id}}</td>
+          <td class="info">{{a.loginCin}}</td>
+          <td class="lista"><input ng-pattern="/^[0-10]+$/" [(ngModel)]="a.listas['Lista1']" (change)="atualizarAluno(a)" placeholder = "-"></td>
+          <td class="lista"><input ng-pattern="/^[0-10]+$/" [(ngModel)]="a.listas['Lista2']" (change)="atualizarAluno(a)" placeholder = "-"></td>
+          <td class="lista"><input ng-pattern="/^[0-10]+$/" [(ngModel)]="a.listas['Lista3']" (change)="atualizarAluno(a)" placeholder = "-"></td>
+          <td class="lista"><input ng-pattern="/^[0-10]+$/" [(ngModel)]="a.listas['Lista4']" (change)="atualizarAluno(a)" placeholder = "-"></td>
+          <td class="lista"><input ng-pattern="/^[0-10]+$/" [(ngModel)]="a.listas['Lista5']" (change)="atualizarAluno(a)" placeholder = "-"></td>
+          <td class="lista"><input ng-pattern="/^[0-10]+$/" [(ngModel)]="a.listas['Lista6']" (change)="atualizarAluno(a)" placeholder = "-"></td>
+          <td class="prova"><input ng-pattern="/^[0-10]+$/" [(ngModel)]="a.provas['EE1']" (change)="atualizarAluno(a)" placeholder = "-"></td>
+          <td class="prova"><input ng-pattern="/^[0-10]+$/" [(ngModel)]="a.provas['EE2']" (change)="atualizarAluno(a)" placeholder = "-"></td>
+          <td class="prova"><input ng-pattern="/^[0-10]+$/" [(ngModel)]="a.provas['EE3']" (change)="atualizarAluno(a)" placeholder = "-"></td>
+          <td class="miniprojeto"><input ng-pattern="/^[0-10]+$/" [(ngModel)]="a.miniprojeto" (change)="atualizarAluno(a)" placeholder = "-"></td>
+          <td class="info">{{a.getAverage()}}</td>
+          <td ><input ng-pattern="/^[0-10]+$/" [(ngModel)]="a.final" (change)="atualizarAluno(a)" placeholder = "-"></td>
+          <td>{{a.getFinalAverage()}}</td>
+          <td class="info">{{a.getStatus(this.classes)}}</td>
+        </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <div class="footer">
+
+</div>

@@ -27,10 +27,11 @@
   align-items: center;
   background-color: #56fe99;
   border-bottom: 1px solid #56fe99;
-  position: fixed;
   width: 100%;
-  z-index: 10;
-  opacity: 0.75;
+}
+
+.content {
+  order: 1;
 }
 
 .navbar {
