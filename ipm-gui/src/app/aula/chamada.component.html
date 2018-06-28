@@ -10,21 +10,12 @@
 
           <thead>
             <th>
-              ID
-            </th>
-            <th>
-              Dia
-            </th>
-            <th>
               Aula
             </th>
           </thead>
         <tbody>
           <tr>
-            <td class="info">{{aula.id}}</td>
-            <td class="info">{{aula.dia}}</td>
-            <td class="info">{{aula.descricao}}</td>
-          </tr>
+            <td class="info">{{this.selectedId}}</td>
         </tbody>
 
       </table>
@@ -55,7 +46,7 @@
             <td class="info">{{a.id}}</td>
             <td class="info">{{a.loginCin}}</td>
             <td class="info">{{a.faltas}}</td>
-            <td class="info">{{a.getAbsence(classes)}}</td>
+            <td class="info">{{a.percentage.toFixed(2)}}%</td>
             <td class="input"><button (click)="registrarFalta(a)">Falta</button></td>
           </tr>
         </tbody>

@@ -6,8 +6,13 @@ export class Aluno{
   listas: Map<string,number>;
   provas: Map<string,number>;
   miniprojeto: number;
+  media: number;
+  mediaFinal: number;
   final: number;
   faltas: number;
+  classes: number;
+  status: string;
+  percentage: number;
 
 
   constructor(){
@@ -22,8 +27,13 @@ export class Aluno{
     this.listas = new Map<string,number>();
     this.provas = new Map<string,number>();
     this.miniprojeto = 0;
+    this.media = 0;
     this.final = 0;
+    this.mediaFinal = 0;
     this.faltas = 0;
+    this.classes = 0;
+    this.percentage = 0;
+    this.status = "";
   }
 
   clone():Aluno{
@@ -41,6 +51,11 @@ export class Aluno{
     this.senha = from.senha;
     this.copyNotasFrom(from);
     this.faltas = from.faltas;
+    this.media = this.getAverage();
+    this.mediaFinal = this.getFinalAverage();
+    this.classes = from.classes;
+    this.percentage = this.getAbsence(this.classes);
+    this.status = this.getStatus(this.classes);
   }
 
   copyNotasFrom(from: Aluno): void {

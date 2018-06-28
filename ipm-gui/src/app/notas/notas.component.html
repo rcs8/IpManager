@@ -72,10 +72,10 @@
           <td class="prova"><input ng-pattern="/^[0-10]+$/" [(ngModel)]="a.provas['EE2']" (change)="atualizarAluno(a)" placeholder = "-"></td>
           <td class="prova"><input ng-pattern="/^[0-10]+$/" [(ngModel)]="a.provas['EE3']" (change)="atualizarAluno(a)" placeholder = "-"></td>
           <td class="miniprojeto"><input ng-pattern="/^[0-10]+$/" [(ngModel)]="a.miniprojeto" (change)="atualizarAluno(a)" placeholder = "-"></td>
-          <td class="info">{{a.getAverage().toFixed(2)}}</td>
+          <td class="info">{{a.media.toFixed(2)}}</td>
           <td class="final"><input ng-pattern="/^[0-10]+$/" [(ngModel)]="a.final" (change)="atualizarAluno(a)" placeholder = "-"></td>
-          <td class="info">{{a.getFinalAverage().toFixed(2)}}</td>
-          <td class="info">{{a.getStatus(classes)}}</td>
+          <td class="info">{{a.mediaFinal.toFixed(2)}}</td>
+          <td class="info">{{a.status}}</td>
         </tr>
       </tbody>
 

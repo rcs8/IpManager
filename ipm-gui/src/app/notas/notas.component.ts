@@ -19,8 +19,12 @@ export class NotasComponent implements OnInit {
   classes: number;
 
   atualizarAluno(aluno: Aluno): void {
+    aluno.classes = this.classes;
     this.alunoService.atualizar(aluno)
          .catch(erro => alert(erro));
+    this.alunoService.getAlunos()
+        .then(alunos => this.alunos = alunos)
+        .catch(erro => alert(erro));
   }
 
   ngOnInit(): void {
