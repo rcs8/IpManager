@@ -1,30 +1,88 @@
 import { Monitor } from '../monitor/monitor';
 import { Aluno } from '../aluno/aluno';
+import { AlunoService } from '../aluno/aluno.service';
+import { MonitorService } from '../monitor/monitor.service';
 import { Injectable } from '@angular/core';
 
 
 @Injectable()
 export class AlocaçaoMonitoresService {
-	monitores: Monitor[]=[];
-	allAlunos: Aluno[]=[];
+	monitorAluno: Map<string,string[]>;
+	alunosNaoAlocados: string[] = [];
+	alunosAlocadosMonitor: string[] = [];
+	allAlunos: Aluno[];
+	allMonitor: Monitor[];
+	maxMonitores: number;
 	
   constructor() { }  
 
-  getMonitores(): Monitor[]{
-	  return this.monitores;
+  getMonitoresAluno(): Map<string,string[]>{
+	  return this.monitorAluno;
   }
   
-  getAllAlunos(): Aluno[]{
-	  return this.allAlunos;
+  getAllMonitores(): Monitor[]{
+	  return this.allMonitor;
   }
+  
+  getAlunosNaoAlocados(): string[]{
+	  var alunos: Aluno []= [];
+	  alunos = this.allAlunos;
+	  for(let i in alunos){
+		  var aluno: string;
+		  aluno = this.procurarAluno(alunos[i].loginCin);
+		  if(!aluno){
+			  this.alunosNaoAlocados.push(aluno);
+		  }
+	  }	  
+	  return this.alunosNaoAlocados;
+  }
+  
   
   atualizarMonitores(): void{
 	  
   }
   
+  procurarAluno(aluno: string): string{
+	  var nomeAluno: string;
+	  nomeAluno = null;
+	  for(let i in this.monitorAluno){
+		this.alunosAlocadosMonitor = this.monitorAluno[i];
+		this.alunosAlocadosMonitor.find(elem=> elem == aluno);
+	  }
+	  return nomeAluno;
+	}
+	
+	procurarMonitorKey(monitor: string): string{
+	  var nomeMonitor: string;
+	  nomeMonitor = null;
+	  for(let i in this.monitorAluno){
+		  if(i == monitor){
+			  nomeMonitor = i;
+		  }
+	  }
+	  return nomeMonitor;
+	}
+	
+	removerAlunoNoMonitor(aluno: string): void {
+	  for(let i in this.monitorAluno){
+		this.alunosAlocadosMonitor = this.monitorAluno[i];
+		this.alunosAlocadosMonitor.filter(elem=> elem != aluno);
+	  }
+	}
   
+  getAlunosAlocados(monitor: string): string[]{
+	  var monitorAux: string;
+	  monitorAux = this.procurarMonitorKey(monitor);
+	  return this.monitorAluno[''+monitorAux+''];
+  }
   
-  alocarMonitorAluno(monitor: Monitor, aluno: Aluno): string {
+  alocarMonitorAluno(monitor: string, aluno: string): string {
+	  var key: string;
+	  key = this.procurarMonitorKey(monitor);
+	  if(key){
+		  this.removerAlunoNoMonitor(aluno);
+		  this.monitorAluno[''+key+''].push(aluno);
+	  }
 	  return "sucesso";
   }
   

@@ -1,20 +1,19 @@
+
 <ul name= "listanaoalocados">
-<li *ngFor="let a of getAlunosNaoAlocados()">
-	{{a.loginCin}} 
-</li>
+<li *ngFor="let a of alunosNaoAlocados">{{a}} </li>
 </ul>
 
 <table>
 <tr>
    <td><label>Monitor </label></td>
-   <td><input name="monitornamebox" [(ngModel)]="monitorTemp.loginCin" (change)="atualizarAluno(a)" ></td>
+   <td><input name="monitornamebox" [(ngModel)]="monitorTemp" ></td>
 </tr>
 <tr>
    <td><label>Aluno </label></td>
-   <td><input name="alunologinbox" [(ngModel)]="alunoTemp.loginCin" (change)="procurarAlunoNaoAlocado(alunoTemp.loginCin)" ></td>
+   <td><input name="alunologinbox" [(ngModel)]="alunoTemp" ></td>
 </tr>
 <tr>
-   <td><button (click)="alocarMonitorAluno(monitor,aluno)">Alocar</button></td>
+   <td><button (click)="alocarMonitorAluno()">Alocar</button></td>
 </tr>
 <tr>
    <td><label>Numero Maximo de Monitores </label></td>
@@ -23,16 +22,16 @@
 </table>
 
 <ul name= "listamonitoraluno">
-<li *ngFor="let a of monitores">
+<li *ngFor="let a of allMonitorName">
 <table>
 <thead>
-    <tr><td name="nomemonitor" >{{a.nome}}</td></tr>
+    <tr><td name="nomemonitor" >{{a}}</td></tr>
 </thead>
 <tr *ngIf="getAlunosAlocados(a).length > 0">
    <th>Nome do Aluno</th>
 </tr>
 <tr *ngFor="let b of getAlunosAlocados(a)" name="alunomonitorlist">
-   <td name="loginaluno">{{b.loginCin}}</td>
+   <td name="loginaluno">{{b}}</td>
 </tr>
 </table>
 </li>

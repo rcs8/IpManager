@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { Monitor } from '../monitor/monitor';
 import { Aluno } from '../aluno/aluno';
 import { AlocaçaoMonitoresService } from './alocaçao-monitores.service';
+import { AlunoService } from '../aluno/aluno.service';
+import { MonitorService } from '../monitor/monitor.service';
 
 
 @Component({
@@ -12,54 +14,60 @@ import { AlocaçaoMonitoresService } from './alocaçao-monitores.service';
 })
 export class AlocaçaoMonitoresComponent implements OnInit {
 
-  constructor(private alocaçaoService: AlocaçaoMonitoresService) { }
-  alunosNaoAlocados: Aluno[] = [];
-  monitores: Monitor[] = [];
-  alunosAlocadosMonitor: Aluno[] = [];
-  monitorTemp: Monitor;
-  alunoTemp: Aluno;
+  constructor(private alocaçaoService: AlocaçaoMonitoresService, private alunoService: AlunoService,
+  private monitorService: MonitorService) { }
+  monitorAlunosList: Map<string,string[]>;
+  allMonitorName: string[] = [];
+  alunosNaoAlocados: string[] = [];
+  monitorTemp: string;
+  alunoTemp: string;
   maxMonitores: number;
   
-  quantidadeAlunosMonitor(monitor: Monitor): number{
-		return monitor.getAlunosAlocados().length;
+  quantidadeAlunosMonitor(monitor: string): number{
+		return this.alocaçaoService.getAlunosAlocados(monitor).length;
 	}
 	
-  alocarMonitorAluno(monitor: Monitor,aluno: Aluno): void{
-	  if(this.quantidadeAlunosMonitor(monitor) <= this.maxMonitores){
+  alocarMonitorAluno(): void{
+	  if(this.quantidadeAlunosMonitor(this.monitorTemp) <= this.maxMonitores){
 		console.log("Nao é permitido atribuir outro aluno a esse monitor. Limite estrapolado");
 	  }else{
-		this.alocaçaoService.alocarMonitorAluno(monitor,aluno);
+		this.alocaçaoService.alocarMonitorAluno(this.monitorTemp,this.alunoTemp);
 	  }
   }
   
-  getAlunosAlocados(from: Monitor): Aluno[]{
-	   this.alunosAlocadosMonitor = from.getAlunosAlocados();
-	  return this.alunosAlocadosMonitor;
+  getAlunosAlocados(from: string): string[]{
+	   return this.alocaçaoService.getAlunosAlocados(from);
   }
-  
-  getAlunosNaoAlocados(): Aluno[]{
-	  for(let i in this.monitores){
-		  this.alunosAlocadosMonitor = this.getAlunosAlocados(this.monitores[i]);
-		  for (let j in this.alunosAlocadosMonitor){
-		  this.alunosNaoAlocados.filter(a => a.loginCin != this.alunosAlocadosMonitor[j].loginCin);
-		  }
-	  }
-	  return this.alunosNaoAlocados;
+	
+	 existeAluno(loginCin: string): number{
+		return this.alocaçaoService.alunosNaoAlocados.filter(a => a == loginCin).length;
 	}
 	
-	existeAlunoNaoAlocado(loginCin: string): number{
-		return this.alunosNaoAlocados.filter(a => a.loginCin === loginCin).length;
+	existeMonitor(loginCin: string): number{
+		return this.alocaçaoService.alunosNaoAlocados.filter(a => a == loginCin).length;
 	}
 	
 	setMaxMonitores(novoMax: number): void{
+		this.alocaçaoService.maxMonitores = novoMax;
 		this.maxMonitores = novoMax;
+	}
+	
+	procurarMonitorName(monitor: string): string{
+		return this.monitorAlunosList[this.alocaçaoService.procurarMonitorKey(monitor)];
+	}
+	
+	getAllMonitorsName(): void{
+		for(let i in this.alocaçaoService.allMonitor){
+			this.allMonitorName.push(this.alocaçaoService.allMonitor[i].loginCin);
+		}
 	}
 
   ngOnInit() {
-	  this.monitores = this.alocaçaoService.getMonitores();
-	  this.alunosNaoAlocados = this.alocaçaoService.getAllAlunos();
-	  this.alunoTemp = new Aluno();
-	  this.monitorTemp = new Monitor();
+	  this.maxMonitores = 6/* this.alocaçaoService.maxMonitores; */
+	  this.alocaçaoService.allAlunos = this.alunoService.getAlunos();
+	  this.alocaçaoService.allMonitor = this.monitorService.getMonitores();
+	  this.monitorAlunosList = this.alocaçaoService.getMonitoresAluno();
+	  this.alunosNaoAlocados =  this.alocaçaoService.getAlunosNaoAlocados();
   }
 
 }
