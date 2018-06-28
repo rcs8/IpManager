@@ -16,10 +16,9 @@ export class AlunoComponent implements OnInit
   aluno: Aluno = new Aluno();
   alunos: Aluno[];
   userRegistered: boolean = false;
-  id: number;
 
   criar(a: Aluno): void {
-    a.id = this.id;
+    a.id = this.alunos.length + 1;
     this.alunoService.criar(a).then(ab => {
           if (ab) {
              this.alunos.push(ab);
@@ -36,8 +35,5 @@ export class AlunoComponent implements OnInit
     this.alunoService.getAlunos()
        .then(as => this.alunos = as)
        .catch(erro => alert(erro));
-    if(!this.alunos == null){
-      this.id = this.alunos.length + 1;
-    }
   }
 }

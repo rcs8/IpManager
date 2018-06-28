@@ -15,15 +15,14 @@ export class AulaComponent implements OnInit
 
    aula: Aula = new Aula();
    aulas: Aula[];
-   id: number;
 
    cadastrar(a: Aula) : void {
-     a.id = this.id;
+     a.id = this.aulas.length + 1;
      this.aulaService.criar(a)
         .then(ab => {
            if (ab) {
               this.aulas.push(ab);
-              this.aula = new Aluno();
+              this.aula = new Aula();
            }
         })
         .catch(erro => alert(erro));
@@ -33,9 +32,5 @@ export class AulaComponent implements OnInit
      this.aulaService.getAulas()
         .then(as => this.aulas = as)
         .catch(erro => alert(erro));
-     if(!this.aulas == null){
-       this.id = this.aulas.length + 1;
-     }
-
    }
 }

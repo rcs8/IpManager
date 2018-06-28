@@ -20,7 +20,7 @@ defineSupportCode(function ({Given, When, Then}){
     await $("a[name='cadastro']").click();
     await $("input[name='loginCin']").sendKeys(<string> login);
     await $("input[name='loginHuxley']").sendKeys(<string> login);
-    await $("input[name='senha']").sendKeys(<string> login);
+    await $("input[name='password']").sendKeys(<string> login);
     await element(by.buttonText('Cadastrar')).click();
 
     var allLogins : ElementArrayFinder = element.all(by.name('loginCinlist'));

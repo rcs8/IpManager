@@ -43,7 +43,7 @@ export class ChamadaComponent implements OnInit
           .then(as => this.alunos = as)
           .catch(erro => alert(erro));
 
-      this.aula = this.aula.find(a => a.id == selectedId);
+      this.aula = this.aulas.find(a => a.id == this.selectedId);
       this.classes = this.aulas.length;
 
 
