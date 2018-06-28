@@ -1,0 +1,21 @@
+<ul>
+<li *ngFor= "let a of relatTurma" name="turmaslist" class="turmaRelatorio">
+<table>
+<thead>
+    <tr class="separateElems"><td>{{a.nomeTurma}}</td></tr>
+</thead>
+<tr *ngIf="getNumAlunos(a) > 0" >
+   <th>Nome</th>
+   <th>Media</th>
+   <th>Presença</th>
+   <th>Status</th>
+</tr>
+<tr *ngFor="let b of getAlunosFromRelatorio(a)" name="alunolist" >
+   <td name="nomealuno">{{b.loginCin}}</td>
+   <td name="mediaaluno">{{""+b.media+""}}</td>
+   <td name="presaluno">{{""+b.presenca+"%"}}</td>
+   <td name="statusaluno">{{b.stts}}</td> 
+</tr>
+</table>
+</li>
+</ul>
