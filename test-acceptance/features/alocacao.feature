@@ -33,7 +33,8 @@ And "ramon" com "rodrigo" alocados
 
 Scenario: Troca de alunos entre monitores (GUI)
 Given estou logado como professor "paulo"
+And estou na pagina de alocação de monitores
 And eu vejo uma lista de monitores com o monitor "rafael" com "tharcio", "rodrigo", "jose", "maria", "joao", "carlos" alocados e o monitor "ramon" com "" alocados
 And uma mensagem indicando o máximo de "6" alunos por monitor
-When eu  tento alocar o aluno “rodrigo” ao monitor “ramon” 
+When eu tento alocar o aluno “rodrigo” ao monitor “ramon” 
 Then eu vejo a lista de monitores mostrando "rafael" com "tharcio", "jose", "maria", "joao"e "carlos" alocados e "ramon" com "rodrigo" alocados
