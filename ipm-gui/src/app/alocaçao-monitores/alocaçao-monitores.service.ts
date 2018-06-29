@@ -3,6 +3,8 @@ import { Aluno } from '../aluno/aluno';
 import { AlunoService } from '../aluno/aluno.service';
 import { MonitorService } from '../monitor/monitor.service';
 import { Injectable } from '@angular/core';
+import { Http, Headers } from '@angular/http';
+import 'rxjs';
 
 
 @Injectable()
@@ -14,9 +16,15 @@ export class AlocaçaoMonitoresService {
 	allMonitor: Monitor[];
 	maxMonitores: number;
 	
-  constructor() { }  
+	private headers = new Headers({'Content-Type': 'application/json'});
+	private ipmURL = 'http://localhost:3000';
+	
+  constructor(private http: Http) { }  
 
-  getMonitoresAluno(): Map<string,string[]>{
+  getMonitoresAluno(): Map<string,string[]> {
+	  this.http.get(this.ipmURL + "/alocacao")
+					.then(monitorAluno => this.monitorAluno = monitorAluno)
+					.catch(this.tratarErro);
 	  return this.monitorAluno;
   }
   
@@ -66,7 +74,7 @@ export class AlocaçaoMonitoresService {
 	removerAlunoNoMonitor(aluno: string): void {
 	  for(let i in this.monitorAluno){
 		this.alunosAlocadosMonitor = this.monitorAluno[i];
-		this.alunosAlocadosMonitor.filter(elem=> elem != aluno);
+		this.alunosAlocadosMonitor.filter(elem=> elem !== aluno);
 	  }
 	}
   
@@ -76,15 +84,25 @@ export class AlocaçaoMonitoresService {
 	  return this.monitorAluno[''+monitorAux+''];
   }
   
-  alocarMonitorAluno(monitor: string, aluno: string): string {
+  alocarMonitorAluno(monitor: string, aluno: string): Promise<string> {
 	  var key: string;
 	  key = this.procurarMonitorKey(monitor);
 	  if(key){
 		  this.removerAlunoNoMonitor(aluno);
 		  this.monitorAluno[''+key+''].push(aluno);
 	  }
-	  return "sucesso";
+	  return this.http.put(this.ipmURL + "/alocaçao",JSON.stringify(this.monitorAluno), {headers: this.headers})
+         .toPromise()
+         .then(res => {
+            if (res.json().success) {return monitor;} else {return null;}
+         })
+         .catch(this.tratarErro);
   }
+  
+  private tratarErro(erro: any): Promise<any>{
+   console.error('Acesso mal sucedido ao serviço de alocaçao de monitores',erro);
+   return Promise.reject(erro.message || erro);
+ }
   
   
 }

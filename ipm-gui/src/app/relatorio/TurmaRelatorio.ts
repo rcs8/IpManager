@@ -35,14 +35,6 @@ export class RelatorioTurma{
 		this.alunos.push(aluno);
 	}
 	
-	gerarRelatorioFinal(from: Turma): void{
-		this.nomeTurma=from.nomeTurma;
-		var alunosRecieved = from.alunos;
-		for (let i in from){
-			this.gerarRelatorioAlunoUm(alunosRecieved[i]);
-		}
-	}
-	
 	getAlunos(): AlunoRelatorio[] {
 		return this.alunos;
 	}

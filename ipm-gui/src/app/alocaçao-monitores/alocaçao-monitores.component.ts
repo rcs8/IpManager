@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
+
 import { Monitor } from '../monitor/monitor';
 import { Aluno } from '../aluno/aluno';
 import { AlocaçaoMonitoresService } from './alocaçao-monitores.service';
@@ -13,6 +14,8 @@ import { MonitorService } from '../monitor/monitor.service';
   styleUrls: ['./alocaçao-monitores.component.css']
 })
 export class AlocaçaoMonitoresComponent implements OnInit {
+  private headers = new Headers({'Content-Type': 'application/json'});
+  private taURL = 'http://localhost:3000';
 
   constructor(private alocaçaoService: AlocaçaoMonitoresService, private alunoService: AlunoService,
   private monitorService: MonitorService) { }
@@ -31,7 +34,9 @@ export class AlocaçaoMonitoresComponent implements OnInit {
 	  if(this.quantidadeAlunosMonitor(this.monitorTemp) <= this.maxMonitores){
 		console.log("Nao é permitido atribuir outro aluno a esse monitor. Limite estrapolado");
 	  }else{
-		this.alocaçaoService.alocarMonitorAluno(this.monitorTemp,this.alunoTemp);
+		this.alocaçaoService.alocarMonitorAluno(this.monitorTemp,this.alunoTemp)
+												.then(monitor => this.monitorTemp = monitor)
+												.catch(erro => alert(erro));
 	  }
   }
   
@@ -63,9 +68,13 @@ export class AlocaçaoMonitoresComponent implements OnInit {
 	}
 
   ngOnInit() {
-	  this.maxMonitores = 6/* this.alocaçaoService.maxMonitores; */
-	  this.alocaçaoService.allAlunos = this.alunoService.getAlunos();
-	  this.alocaçaoService.allMonitor = this.monitorService.getMonitores();
+	  this.maxMonitores = this.alocaçaoService.maxMonitores;
+	  this.alunoService.getAlunos()
+		.then(alunos =>this.alocaçaoService.allAlunos = alunos)
+		.catch(erro => alert(erro));
+	  this.monitorService.getMonitores()
+	    .then(monitores =>this.alocaçaoService.allMonitor = monitores)
+		.catch(erro => alert(erro));
 	  this.monitorAlunosList = this.alocaçaoService.getMonitoresAluno();
 	  this.alunosNaoAlocados =  this.alocaçaoService.getAlunosNaoAlocados();
   }

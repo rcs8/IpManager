@@ -5,6 +5,8 @@ import {Turma} from '../turma/turma'
 import {AlunoRelatorio} from './AlunoRelatorio'
 import {RelatorioTurma} from './TurmaRelatorio'
 import {RelatorioService} from './relatorio.service'
+import {AlunoService} from '../aluno/aluno.service'
+
 
 @Component({
   selector: 'app-relatorio',
@@ -13,7 +15,7 @@ import {RelatorioService} from './relatorio.service'
 })
 export class RelatorioComponent implements OnInit {
 
-   constructor(private relatorioService: RelatorioService) { }
+   constructor(private relatorioService: RelatorioService, private alunoService: AlunoService) { }
 
    alunos: AlunoRelatorio[]=[];
    relatTurma: RelatorioTurma[]=[];
@@ -26,13 +28,11 @@ export class RelatorioComponent implements OnInit {
    getNumAlunos(from: RelatorioTurma): number {
 	   return from.alunos.length; 
    }
-  
-  getRelatoriosAnteriores(): RelatorioTurma[] {
-	  return this.relatorioService.getRelatoriosTurmasAnteriores()
-  }
 
   ngOnInit(): void {
-     this.relatTurma =this.relatorioService.getRelatoriosTurmasAnteriores()
+      this.relatorioService.getRelatoriosTurmasAnteriores()
+							.then(relatorios = this.relatTurma =relatorios)
+							.catch(erro => alert(erro));
    }
 
 }
