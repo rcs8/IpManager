@@ -1,0 +1,39 @@
+
+<table>
+<thead>
+    <tr><td>{{aluno.loginCin}}</td></tr>
+</thead>
+<tr>
+   <th>Lista 1</th>
+   <th>Lista 2</th>
+   <th>Lista 3</th>
+   <th>Lista 4</th>
+   <th>Lista 5</th>
+   <th>Lista 6</th>
+   <th>EE 1</th>
+   <th>EE 2</th>
+   <th>EE 3</th>
+   <th>Mini Projeto</th>
+   <th>Final</th>
+   <th>Media</th>
+</tr>
+<tr name="alunolist">
+   <td name="listaUm">{{aluno.listas['Lista1']}}</td>
+   <td name="listaDois">{{aluno.listas['Lista2']}}</td>
+   <td name="listaTres">{{aluno.listas['Lista3']}}</td>
+   <td name="listaQuatro">{{aluno.listas['Lista4']}}</td>
+   <td name="listaQuatro">{{aluno.listas['Lista5']}}</td>
+   <td name="listaQuatro">{{aluno.listas['Lista6']}}</td>
+   <td name="avUm">{{aluno.provas['EE1']}}</td>
+   <td name="avUm">{{aluno.provas['EE2']}}</td>
+   <td name="avUm">{{aluno.provas['EE3']}}</td>
+   <td name="avUm">{{aluno.miniprojeto['EE3']}}</td>
+   <td name="final">{{aluno.final}}</td>
+   <td name="media">{{aluno.getAverage()}}</td>
+</tr>
+<tfoot>
+	<tr><th>Status</th></tr>
+    <td name="statusaluno">{{this.aluno.getStatus()}}</td>
+</tfoot>
+</table>
+
