@@ -1,0 +1,25 @@
+<p>
+Lista da Relatorios de Turma Atual
+</p>
+
+<ul>
+<li>
+<table>
+<thead>
+    <tr><td>{{relatorioTurma.nomeTurma}}</td></tr>
+</thead>
+<tr *ngIf="getTamanhoRelatorioTurma() > 0" >
+   <th>Nome</th>
+   <th>Media</th>
+   <th>Presença</th>
+   <th>Status</th>
+</tr>
+<li *ngFor= "let a of relatorioTurma" name="turmaslist">
+   <td name="nomealuno">{{a.loginCin}}</td>
+   <td name="mediaaluno">{{""+a.media+""}}</td>
+   <td name="presaluno">{{""+a.presenca+"%"}}</td>
+   <td name="statusaluno">{{a.stts}}</td> 
+</tr>
+</table>
+</li>
+</ul>
